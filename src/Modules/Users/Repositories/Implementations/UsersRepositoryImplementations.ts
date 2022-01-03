@@ -1,8 +1,14 @@
+import { getRepository, Repository } from 'typeorm';
 import User from '../../Models/User';
 import { ICreateUserDTO } from '../DTOs/ICreateUserDTO';
 import { IUsersRepositories } from '../IUsersRepositories';
 
 class UsersRepositoryImplementations implements IUsersRepositories {
+  private repository: Repository<User>;
+
+  private constructor() {
+    this.repository = getRepository(User);
+  }
   create({
     Name,
     Surname,

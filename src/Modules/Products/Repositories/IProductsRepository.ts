@@ -9,8 +9,8 @@ export interface IProductsRepository {
     Value,
     StockAmount,
     ProductUrl,
-  }: ICreateProductDTO): void;
-  listAll(): Product[];
+  }: ICreateProductDTO): Promise<void>;
+  listAll(): Promise<Product[]>;
   findById(id: string): Product;
   findByName(name: string): Product;
 }

@@ -1,0 +1,9 @@
+{
+  "type": "mssql",
+  "port": 1433,
+  "host": "localhost",
+  "username": "sa",
+  "password": "Miguelpombo96!",
+  "database": "loja-online",
+  "entities": ["src/Modules/**/Models/*.ts"]
+}

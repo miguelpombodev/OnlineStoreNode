@@ -1,4 +1,4 @@
-import User from '../Models/User';
+import Customers from '../Entities/Customer';
 import { ICreateUserDTO } from './DTOs/ICreateUserDTO';
 
 export interface IUsersRepositories {
@@ -14,5 +14,5 @@ export interface IUsersRepositories {
     City,
     UF,
   }: ICreateUserDTO): void;
-  findById(id: string): User;
+  findById(id: string): Customers;
 }

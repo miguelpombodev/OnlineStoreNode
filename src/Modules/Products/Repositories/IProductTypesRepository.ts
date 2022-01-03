@@ -1,4 +1,4 @@
-import ProductType from '../Models/ProductType';
+import ProductType from '../Entities/ProductType';
 import { ICreateProductTypeDTO } from './DTOs/ICreateProductTypeDTO';
 
 export interface IProductTypesRepository {

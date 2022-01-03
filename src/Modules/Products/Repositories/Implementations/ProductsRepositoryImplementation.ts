@@ -1,5 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
-import Product from '../../Models/Product';
+import Product from '../../Entities/Product';
 import { ICreateProductDTO } from '../DTOs/ICreateProductDTO';
 import { IProductsRepository } from '../IProductsRepository';
 
@@ -36,10 +36,10 @@ class ProductsRepositoryImplementation implements IProductsRepository {
 
     return productsList;
   }
-  findById(id: string): Product {
+  async findById(id: string): Promise<Product> {
     throw new Error('Method not implemented.');
   }
-  findByName(name: string): Product {
+  async findByName(name: string): Promise<Product> {
     throw new Error('Method not implemented.');
   }
 }

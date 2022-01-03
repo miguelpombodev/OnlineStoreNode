@@ -1,13 +1,13 @@
 import { getRepository, Repository } from 'typeorm';
-import User from '../../Models/User';
+import Customers from '../../Entities/Customer';
 import { ICreateUserDTO } from '../DTOs/ICreateUserDTO';
 import { IUsersRepositories } from '../IUsersRepositories';
 
 class UsersRepositoryImplementations implements IUsersRepositories {
-  private repository: Repository<User>;
+  private repository: Repository<Customers>;
 
   private constructor() {
-    this.repository = getRepository(User);
+    this.repository = getRepository(Customers);
   }
   create({
     Name,
@@ -23,7 +23,7 @@ class UsersRepositoryImplementations implements IUsersRepositories {
   }: ICreateUserDTO): void {
     throw new Error('Method not implemented.');
   }
-  findById(id: string): User {
+  findById(id: string): Customers {
     throw new Error('Method not implemented.');
   }
 }

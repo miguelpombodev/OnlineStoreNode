@@ -2,8 +2,10 @@ import ProductsRepositoryImplementation from '../Repositories/Implementations/Pr
 import ProductsService from '../Services/ProductsService';
 import ProductsController from './ProductsController';
 
-const productsRepository = new ProductsRepositoryImplementation();
-const productService = new ProductsService(productsRepository);
-const productsController = new ProductsController(productService);
+export default () => {
+  const productsRepository = new ProductsRepositoryImplementation();
+  const productService = new ProductsService(productsRepository);
+  const productsController = new ProductsController(productService);
 
-export { productsController };
+  return productsController;
+};

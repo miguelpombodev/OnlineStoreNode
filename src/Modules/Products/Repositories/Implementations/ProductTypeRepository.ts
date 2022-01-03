@@ -1,5 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
-import ProductType from '../../Models/ProductType';
+import ProductType from '../../Entities/ProductType';
 import { ICreateProductTypeDTO } from '../DTOs/ICreateProductTypeDTO';
 import { IProductTypesRepository } from '../IProductTypesRepository';
 

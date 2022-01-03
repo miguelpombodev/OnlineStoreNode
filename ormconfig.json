@@ -4,6 +4,11 @@
   "host": "localhost",
   "username": "sa",
   "password": "Miguelpombo96!",
-  "database": "loja-online",
-  "entities": ["src/Modules/**/Models/*.ts"]
+  "database": "OnlineStore",
+  "options": { "encrypt": false },
+  "migrations": ["./src/Database/Migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/Database/Migrations"
+  },
+  "entities": ["./src/Modules/**/Entities/*.ts"]
 }

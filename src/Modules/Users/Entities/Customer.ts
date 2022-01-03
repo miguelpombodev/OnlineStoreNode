@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-class User {
+class Customers {
   @PrimaryColumn()
   Id: string;
 
@@ -47,4 +47,4 @@ class User {
   UpdatedAt: Date;
 }
 
-export default User;
+export default Customers;

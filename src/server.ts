@@ -3,6 +3,7 @@ import express from 'express';
 import productsRoute from './Routes/products.route';
 import usersRoute from './Routes/users.route';
 import './Database';
+import './Shared/Container';
 
 const app = express();
 const PORT = 3333;

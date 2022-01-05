@@ -6,7 +6,7 @@ import { IUsersRepositories } from '../IUsersRepositories';
 class UsersRepositoryImplementations implements IUsersRepositories {
   private repository: Repository<Customers>;
 
-  private constructor() {
+  constructor() {
     this.repository = getRepository(Customers);
   }
   create({

@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 import Product from '../../Entities/Product';
 import { ICreateProductDTO } from '../DTOs/ICreateProductDTO';
 import { IProductsRepository } from '../IProductsRepository';
+import { v4 as uuid } from 'uuid';
 
 class ProductsRepositoryImplementation implements IProductsRepository {
   private repository: Repository<Product>;
@@ -15,11 +16,14 @@ class ProductsRepositoryImplementation implements IProductsRepository {
     Sku,
     TypeId,
     Value,
-    StockAmount,
+    StockAmount = 0,
     ProductUrl,
-  }: ICreateProductDTO): Promise<void> {
+  }: ICreateProductDTO): Promise<Product> {
+    const Id = uuid();
+
     try {
-      const productCreated = await this.repository.create({
+      const productCreated = this.repository.create({
+        Id,
         Name,
         Sku,
         TypeId,
@@ -29,7 +33,10 @@ class ProductsRepositoryImplementation implements IProductsRepository {
       });
 
       await this.repository.save(productCreated);
-    } catch {}
+      return productCreated;
+    } catch (e) {
+      throw new Error(e);
+    }
   }
   async listAll(): Promise<Product[]> {
     const productsList = await this.repository.find();
@@ -37,11 +44,17 @@ class ProductsRepositoryImplementation implements IProductsRepository {
     return productsList;
   }
   async findById(id: string): Promise<Product> {
-    throw new Error('Method not implemented.');
+    const product = await this.repository.findOne(id);
+
+    return product;
   }
   async findByName(name: string): Promise<Product> {
-    throw new Error('Method not implemented.');
+    const product = await this.repository.findOne(name);
+
+    return product;
   }
+
+  async updateProduct(id: number): Promise<Product> {}
 }
 
 export default ProductsRepositoryImplementation;

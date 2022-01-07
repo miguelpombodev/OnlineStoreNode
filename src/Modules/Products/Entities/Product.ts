@@ -2,18 +2,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import ProductType from './ProductType';
 
 @Entity('product')
 class Product {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   Id: string;
 
   @ManyToOne((type) => ProductType, (p) => p.Id)

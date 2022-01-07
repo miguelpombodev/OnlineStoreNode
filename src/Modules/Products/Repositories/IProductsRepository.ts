@@ -4,13 +4,14 @@ import { ICreateProductDTO } from './DTOs/ICreateProductDTO';
 export interface IProductsRepository {
   create({
     Name,
-    Sku,
     TypeId,
+    Sku,
     Value,
     StockAmount,
     ProductUrl,
-  }: ICreateProductDTO): Promise<void>;
+  }: ICreateProductDTO): Promise<Product>;
   listAll(): Promise<Product[]>;
   findById(id: string): Promise<Product>;
   findByName(name: string): Promise<Product>;
+  update(id: string): Promise<Product>;
 }

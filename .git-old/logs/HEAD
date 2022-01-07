@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 c6c8dbb22010f396fef7bfd1c39e3841a6c948c7 miguelpombodev <mp96dev@gmail.com> 1641118637 -0300	commit (initial): Initial Structure
+c6c8dbb22010f396fef7bfd1c39e3841a6c948c7 bb2d01203cb972369621e78abcfe03fc43df186e miguelpombodev <mp96dev@gmail.com> 1641122979 -0300	commit: Structuring repositories and models
+bb2d01203cb972369621e78abcfe03fc43df186e af329674bc50471782f3d1a50ba9f5b821f2c4e4 miguelpombodev <mp96dev@gmail.com> 1641192850 -0300	commit: TypeORM and Database connection -wip
+af329674bc50471782f3d1a50ba9f5b821f2c4e4 b70673429b55bae45da6ecbbd7b78a90cca23776 miguelpombodev <mp96dev@gmail.com> 1641207850 -0300	commit: Database and Project Structures changes
+b70673429b55bae45da6ecbbd7b78a90cca23776 07ab8f388ef6d98b6d0dafd60f2aae1e35446fe1 miguelpombodev <mp96dev@gmail.com> 1641418236 -0300	commit: Using now Controllers and Dependency Injection
+07ab8f388ef6d98b6d0dafd60f2aae1e35446fe1 dee327c96ef340c7eec3b6c2f421cc5ecc04777f miguelpombodev <mp96dev@gmail.com> 1641438301 -0300	commit: Creating new products

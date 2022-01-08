@@ -11,7 +11,7 @@ class ProductsController {
     return response.json(productBody);
   }
 
-  async create(request: Request, response: Response): Promise<void> {
+  async create(request: Request, response: Response): Promise<Response> {
     const _productService = container.resolve(ProductsService);
 
     const body = request.body;
@@ -19,22 +19,50 @@ class ProductsController {
     const creationResult = await _productService.create(body);
 
     if (creationResult === null) {
-      response.status(404).json({
+      return response.status(404).json({
         error: 'Product not found',
       });
     }
 
-    response.json(creationResult);
+    return response.json(creationResult);
   }
 
   async update(request: Request, response: Response): Promise<Response> {
     const _productService = container.resolve(ProductsService);
 
-    const { productId } = request.params;
+    const { id } = request.params;
+    const body = request.body;
 
-    const updateResult = _productService.update(productId);
+    const product = {
+      Id: id,
+      ...body,
+    };
+
+    const updateResult = await _productService.update(product);
+
+    if (updateResult === null) {
+      return response.status(404).json({
+        error: 'Product not found',
+      });
+    }
 
     return response.json(updateResult);
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const _productService = container.resolve(ProductsService);
+
+    const { id } = request.params;
+
+    const deleteResult = _productService.delete(id);
+
+    if (deleteResult === null) {
+      return response.status(404).json({
+        error: 'Product not found',
+      });
+    }
+
+    return response.json(deleteResult);
   }
 }
 

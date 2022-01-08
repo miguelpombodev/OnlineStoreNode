@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import Product from '../Entities/Product';
 
 import { IProductsRepository } from '../Repositories/IProductsRepository';
 
@@ -49,14 +50,26 @@ class ProductsService {
     return productsList;
   }
 
-  async update(id: string) {
+  async update(productInfoUpdate: Product) {
+    const productExist = await this._repository.findById(productInfoUpdate.Id);
+
+    if (!productExist) {
+      return null;
+    }
+
+    const updatedProduct = await this._repository.update(productInfoUpdate);
+    return updatedProduct;
+  }
+
+  async delete(id: string) {
     const productExist = await this._repository.findById(id);
 
     if (!productExist) {
       return null;
     }
 
-    this._repository.update(id);
+    const updatedProduct = await this._repository.delete(id);
+    return updatedProduct;
   }
 }
 

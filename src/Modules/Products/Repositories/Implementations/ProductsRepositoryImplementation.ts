@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, UpdateResult } from 'typeorm';
 import Product from '../../Entities/Product';
 import { ICreateProductDTO } from '../DTOs/ICreateProductDTO';
 import { IProductsRepository } from '../IProductsRepository';
@@ -54,7 +54,32 @@ class ProductsRepositoryImplementation implements IProductsRepository {
     return product;
   }
 
-  async updateProduct(id: number): Promise<Product> {}
+  async update(productInfoUpdate: Product): Promise<Product> {
+    try {
+      await this.repository.update(
+        {
+          Id: productInfoUpdate.Id,
+        },
+        productInfoUpdate
+      );
+
+      const updatedProduct = await this.repository.findOne(
+        productInfoUpdate.Id
+      );
+
+      return updatedProduct;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  async delete(id: string): Promise<void> {
+    try {
+      await this.repository.delete({ Id: id });
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 }
 
 export default ProductsRepositoryImplementation;

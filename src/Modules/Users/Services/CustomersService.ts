@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { ICustomersRepository } from '../Repositories/ICustomersRepositories';
 import { compare } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
 
 interface IRequest {
   Name: string;
@@ -8,6 +9,14 @@ interface IRequest {
   CPF: string;
   Email: string;
   Password: string;
+}
+
+interface IResponse {
+  user: {
+    Name: string;
+    Email: string;
+  };
+  token: string;
 }
 
 @injectable()
@@ -47,7 +56,7 @@ class CustomersService {
     return userFound;
   }
 
-  async loginUser({ Email, Password }: IRequest) {
+  async loginUser({ Email, Password }: IRequest): Promise<IResponse> {
     const isAlreadyUser = await this._repository.findByEmail(Email);
 
     if (!isAlreadyUser) {
@@ -58,7 +67,24 @@ class CustomersService {
       return null;
     }
 
-    return isAlreadyUser;
+    const token = sign(
+      {},
+      '815a7374c650d6715af06a8722fdcfce576714091874d5934efb3c544b527ed7',
+      {
+        subject: isAlreadyUser.Id,
+        expiresIn: '1d',
+      }
+    );
+
+    const loggedUser: IResponse = {
+      user: {
+        Name: isAlreadyUser.Name,
+        Email: isAlreadyUser.Email,
+      },
+      token,
+    };
+
+    return loggedUser;
   }
 }
 

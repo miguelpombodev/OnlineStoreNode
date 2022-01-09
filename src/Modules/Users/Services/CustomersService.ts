@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { ICustomersRepository } from '../Repositories/ICustomersRepositories';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
+import AppError from '../../../Errors/AppError';
 
 interface IRequest {
   Name: string;
@@ -30,7 +31,7 @@ class CustomersService {
     const isAlreadyUser = await this._repository.findByEmail(Email);
 
     if (isAlreadyUser) {
-      return null;
+      throw new AppError('Email/Password are incorrectly');
     }
 
     const user = await this._repository.create({
@@ -48,7 +49,7 @@ class CustomersService {
     const userFound = await this._repository.findById(id);
 
     if (!userFound) {
-      return null;
+      throw new AppError('User not found');
     }
 
     delete userFound.Password;
@@ -60,11 +61,11 @@ class CustomersService {
     const isAlreadyUser = await this._repository.findByEmail(Email);
 
     if (!isAlreadyUser) {
-      return null;
+      throw new AppError('Email/Password are incorrectly');
     }
 
     if (!compare(isAlreadyUser.Password, Password)) {
-      return null;
+      throw new AppError('Email/Password are incorrectly');
     }
 
     const token = sign(

@@ -18,12 +18,6 @@ class ProductsController {
 
     const creationResult = await _productService.create(body);
 
-    if (creationResult === null) {
-      return response.status(404).json({
-        error: 'Product not found',
-      });
-    }
-
     return response.json(creationResult);
   }
 
@@ -40,12 +34,6 @@ class ProductsController {
 
     const updateResult = await _productService.update(product);
 
-    if (updateResult === null) {
-      return response.status(404).json({
-        error: 'Product not found',
-      });
-    }
-
     return response.json(updateResult);
   }
 
@@ -55,12 +43,6 @@ class ProductsController {
     const { id } = request.params;
 
     const deleteResult = _productService.delete(id);
-
-    if (deleteResult === null) {
-      return response.status(404).json({
-        error: 'Product not found',
-      });
-    }
 
     return response.json(deleteResult);
   }

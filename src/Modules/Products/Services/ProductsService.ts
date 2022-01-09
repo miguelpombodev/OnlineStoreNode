@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../Errors/AppError';
 import Product from '../Entities/Product';
 
 import { IProductsRepository } from '../Repositories/IProductsRepository';
@@ -30,7 +31,7 @@ class ProductsService {
     const alreadyHasProduct = await this._repository.findByName(Name);
 
     if (alreadyHasProduct) {
-      return null;
+      throw new AppError('Product already registered');
     }
 
     const productCreated = await this._repository.create({
@@ -55,7 +56,7 @@ class ProductsService {
     const productExist = await this._repository.findById(productInfoUpdate.Id);
 
     if (!productExist) {
-      return null;
+      throw new AppError('Product not found');
     }
 
     const updatedProduct = await this._repository.update(productInfoUpdate);
@@ -66,7 +67,7 @@ class ProductsService {
     const productExist = await this._repository.findById(id);
 
     if (!productExist) {
-      return null;
+      throw new AppError('Product not found');
     }
 
     const updatedProduct = await this._repository.delete(id);

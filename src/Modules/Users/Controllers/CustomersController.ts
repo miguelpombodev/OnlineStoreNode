@@ -27,12 +27,6 @@ class CustomersController {
 
     const userInfos = await usersService.findUser(id);
 
-    if (userInfos === null) {
-      return response.status(404).json({
-        error: 'User or password are incorrect',
-      });
-    }
-
     return response.json(userInfos);
   }
 
@@ -42,12 +36,6 @@ class CustomersController {
     const body = request.body;
 
     const loginResult = await usersService.loginUser(body);
-
-    if (loginResult === null) {
-      return response.status(404).json({
-        message: 'Email/Password are incorrectly',
-      });
-    }
 
     return response.json(loginResult);
   }

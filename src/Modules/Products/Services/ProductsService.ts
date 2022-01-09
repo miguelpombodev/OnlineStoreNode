@@ -4,6 +4,7 @@ import Product from '../Entities/Product';
 import { IProductsRepository } from '../Repositories/IProductsRepository';
 
 interface IRequest {
+  Id?: string;
   Name: string;
   TypeId: number;
   Sku: string;

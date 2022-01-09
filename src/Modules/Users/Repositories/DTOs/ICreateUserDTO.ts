@@ -4,9 +4,4 @@ export interface ICreateUserDTO {
   CPF: string;
   Email: string;
   Password: string;
-  Cellphone: string;
-  Address: string;
-  Neighborhood: string;
-  City: string;
-  UF: string;
 }

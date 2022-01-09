@@ -1,11 +1,12 @@
 import { Router } from 'express';
+import CustomersController from '../Modules/Users/Controllers/CustomersController';
 
 const usersRoute = Router();
 
-usersRoute.get('/', (request, response) => {
-  return response.json({
-    message: 'users working',
-  });
-});
+const customersControllers = new CustomersController();
+
+usersRoute.post('/', customersControllers.create);
+usersRoute.get('/:id', customersControllers.findUser);
+usersRoute.get('/', customersControllers.loginUser);
 
 export default usersRoute;

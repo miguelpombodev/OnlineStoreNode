@@ -2,13 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 class Customers {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   Id: string;
 
   @Column()

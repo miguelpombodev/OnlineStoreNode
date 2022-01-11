@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3333;
 
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 app.use('/products', productsRoute);
 app.use('/users', usersRoute);
 

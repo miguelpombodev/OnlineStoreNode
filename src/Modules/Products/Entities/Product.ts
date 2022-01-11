@@ -2,7 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -15,12 +14,12 @@ class Product {
   @PrimaryGeneratedColumn('uuid')
   Id: string;
 
-  @ManyToOne((type) => ProductType, (p) => p.Id)
-  @JoinColumn({
-    name: 'TypeId',
-    referencedColumnName: 'Id',
-  })
+  @Column()
   TypeId: number;
+
+  @ManyToOne(() => ProductType)
+  @JoinColumn({ name: 'TypeId' })
+  ProductType: ProductType;
 
   @Column()
   Sku: string;

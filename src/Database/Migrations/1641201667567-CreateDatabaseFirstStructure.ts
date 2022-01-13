@@ -65,12 +65,12 @@ export class CreateDatabaseFirstStructure1641201667567
           },
           {
             name: 'Sku',
-            type: 'varchar',
+            type: 'varchar(15)',
             isNullable: false,
           },
           {
             name: 'Name',
-            type: 'nvarchar',
+            type: 'nvarchar(100)',
             isNullable: false,
             isUnique: true,
           },
@@ -132,7 +132,7 @@ export class CreateDatabaseFirstStructure1641201667567
           },
           {
             name: 'Email',
-            type: 'nvarchar(200)',
+            type: 'nvarchar(30)',
             isNullable: false,
           },
           {
@@ -147,12 +147,12 @@ export class CreateDatabaseFirstStructure1641201667567
           },
           {
             name: 'Address',
-            type: 'varchar(100)',
+            type: 'varchar(60)',
             isNullable: true,
           },
           {
             name: 'Neighborhood',
-            type: 'varchar(50)',
+            type: 'varchar(20)',
             isNullable: true,
           },
           {
@@ -202,7 +202,7 @@ export class CreateDatabaseFirstStructure1641201667567
     await queryRunner.createIndex(
       'Customers',
       new TableIndex({
-        name: 'IX_USER_EMAIL',
+        name: 'IX_CUSTOMER_EMAIL',
         columnNames: ['Email'],
       })
     );
@@ -210,7 +210,7 @@ export class CreateDatabaseFirstStructure1641201667567
     await queryRunner.createIndex(
       'Customers',
       new TableIndex({
-        name: 'IX_USER_CPF',
+        name: 'IX_CUSTOMER_CPF',
         columnNames: ['CPF'],
       })
     );
@@ -219,8 +219,8 @@ export class CreateDatabaseFirstStructure1641201667567
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('Product', 'FK_PROD_PRODTYPE');
     await queryRunner.dropIndex('Product', 'IX_PRODUCT_SKU');
-    await queryRunner.dropIndex('Customers', 'IX_USER_EMAIL');
-    await queryRunner.dropIndex('Customers', 'IX_USER_CPF');
+    await queryRunner.dropIndex('Customers', 'IX_CUSTOMER_EMAIL');
+    await queryRunner.dropIndex('Customers', 'IX_CUSTOMER_CPF');
     await queryRunner.dropTable('ProductType');
     await queryRunner.dropTable('Product');
     await queryRunner.dropTable('Customers');

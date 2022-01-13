@@ -17,7 +17,6 @@ class ProductsRepositoryImplementation implements IProductsRepository {
     TypeId,
     Value,
     StockAmount = 0,
-    ProductUrl,
   }: ICreateProductDTO): Promise<Product> {
     const Id = uuid();
 
@@ -29,7 +28,6 @@ class ProductsRepositoryImplementation implements IProductsRepository {
         TypeId,
         Value,
         StockAmount,
-        ProductUrl,
       });
 
       await this.repository.save(productCreated);

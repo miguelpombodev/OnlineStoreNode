@@ -33,9 +33,6 @@ class Product {
   @Column()
   StockAmount: number;
 
-  @Column()
-  ProductUrl: string;
-
   @CreateDateColumn()
   CreatedAt: Date;
 

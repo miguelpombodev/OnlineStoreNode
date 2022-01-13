@@ -8,7 +8,6 @@ export interface IProductsRepository {
     Sku,
     Value,
     StockAmount,
-    ProductUrl,
   }: ICreateProductDTO): Promise<Product>;
   listAll(): Promise<Product[]>;
   findById(id: string): Promise<Product>;

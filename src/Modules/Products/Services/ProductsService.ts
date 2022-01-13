@@ -11,7 +11,6 @@ interface IRequest {
   Sku: string;
   Value: number;
   StockAmount?: number;
-  ProductUrl: string;
 }
 
 @injectable()
@@ -20,14 +19,7 @@ class ProductsService {
     @inject('ProductsRepository')
     private readonly _repository: IProductsRepository
   ) {}
-  async create({
-    Name,
-    TypeId,
-    Sku,
-    Value,
-    StockAmount,
-    ProductUrl,
-  }: IRequest) {
+  async create({ Name, TypeId, Sku, Value, StockAmount }: IRequest) {
     const alreadyHasProduct = await this._repository.findByName(Name);
 
     if (alreadyHasProduct) {
@@ -40,7 +32,6 @@ class ProductsService {
       Sku,
       Value,
       StockAmount,
-      ProductUrl,
     });
 
     return productCreated;

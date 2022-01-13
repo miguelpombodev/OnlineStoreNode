@@ -4,5 +4,4 @@ export interface ICreateProductDTO {
   Name: string;
   Value: number;
   StockAmount: number;
-  ProductUrl: string;
 }

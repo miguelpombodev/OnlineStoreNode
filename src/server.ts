@@ -1,20 +1,22 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
+import swaggerUI from 'swagger-ui-express';
+import swaggerFile from './swagger.json';
 import 'express-async-errors';
-import productsRoute from './Routes/products.route';
-import usersRoute from './Routes/users.route';
 import './Database';
 import './Shared/Container';
 import AppError from './Errors/AppError';
 import cors from 'cors';
+import router from './Routes';
 
 const app = express();
 const PORT = 3333;
 
 app.use(express.json());
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 app.use(cors());
-app.use('/products', productsRoute);
-app.use('/users', usersRoute);
+
+app.use(router);
 
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {

@@ -1,0 +1,64 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OnlineStoreAPI",
+    "description": "API for a online store",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/products": {
+      "post": {
+        "summary": "Create a product",
+        "description": "Create a product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "TypeId": {
+                    "type": "integer"
+                  },
+                  "Sku": {
+                    "type": "string"
+                  },
+                  "Value": {
+                    "type": "number"
+                  },
+                  "StockAmount": {
+                    "type": "integer"
+                  },
+                  "ProductUrl": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "Name": "Product 1",
+                  "TypeId": 4,
+                  "Sku": "TSTPRDONE",
+                  "Value": 100.0,
+                  "StockAmount": 200,
+                  "ProductUrl": "https://test.com"
+                }
+              }
+            }
+          }
+        }
+      },
+      "reponses": {
+        "201": {
+          "description": "Created"
+        },
+        "400": {
+          "description": "Product already registered"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  }
+}

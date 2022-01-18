@@ -2,25 +2,25 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Product from './Product';
 
-@Entity('ProductType')
-class ProductType {
+@Entity('ProductColors')
+class ProductColors {
   @PrimaryColumn()
   Id: number;
 
   @Column()
-  Description: string;
+  ProductColorUrl: string;
 
   @Column()
   Name: string;
 
-  @OneToMany(() => Product, (prod) => prod.TypeId)
-  Products: Product[];
+  @ManyToOne((type) => Product, (prod) => prod.Colors)
+  Product: Product;
 
   @CreateDateColumn()
   CreatedAt: string;
@@ -29,4 +29,4 @@ class ProductType {
   UpdatedAt: string;
 }
 
-export default ProductType;
+export default ProductColors;

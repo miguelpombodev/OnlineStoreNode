@@ -3,6 +3,7 @@ import { ICustomersRepository } from '../Repositories/ICustomersRepositories';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import AppError from '../../../Errors/AppError';
+import { ICartsRepository } from '../../Cart/Repositories/ICartsRepositories';
 
 interface IRequest {
   Name: string;
@@ -18,13 +19,16 @@ interface IResponse {
     Email: string;
   };
   token: string;
+  cartId: string;
 }
 
 @injectable()
 class CustomersService {
   constructor(
     @inject('CustomersRepository')
-    private readonly _repository: ICustomersRepository
+    private readonly _repository: ICustomersRepository,
+    @inject('CartsRepository')
+    private readonly _cartRepository: ICartsRepository
   ) {}
 
   async create({ Name, Surname, CPF, Email, Password }: IRequest) {
@@ -77,12 +81,15 @@ class CustomersService {
       }
     );
 
+    const userCart = await this._cartRepository.create(isAlreadyUser.Id, 0);
+
     const loggedUser: IResponse = {
       user: {
         Name: isAlreadyUser.Name,
         Email: isAlreadyUser.Email,
       },
       token,
+      cartId: userCart,
     };
 
     return loggedUser;

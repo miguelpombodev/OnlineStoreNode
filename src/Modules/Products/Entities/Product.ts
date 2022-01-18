@@ -4,12 +4,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import ProductColors from './ProductColors';
 import ProductType from './ProductType';
 
-@Entity('product')
+@Entity('Product')
 class Product {
   @PrimaryGeneratedColumn('uuid')
   Id: string;
@@ -32,6 +34,9 @@ class Product {
 
   @Column()
   StockAmount: number;
+
+  @OneToMany((type) => ProductColors, (color) => color.Product)
+  Colors: ProductColors[];
 
   @CreateDateColumn()
   CreatedAt: Date;

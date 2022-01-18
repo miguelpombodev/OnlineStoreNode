@@ -43,6 +43,12 @@ class ProductsService {
     return productsList;
   }
 
+  async listOne(id: string) {
+    const productsList = await this._repository.findById(id);
+
+    return productsList;
+  }
+
   async update(productInfoUpdate: Product) {
     const productExist = await this._repository.findById(productInfoUpdate.Id);
 

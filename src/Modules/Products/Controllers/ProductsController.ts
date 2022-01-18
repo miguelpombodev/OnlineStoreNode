@@ -11,6 +11,16 @@ class ProductsController {
     return response.json(productBody);
   }
 
+  async listOne(request: Request, response: Response): Promise<Response> {
+    const _productService = container.resolve(ProductsService);
+
+    const { id } = request.params;
+
+    const productBody = await _productService.listOne(id);
+
+    return response.json(productBody);
+  }
+
   async create(request: Request, response: Response): Promise<Response> {
     const _productService = container.resolve(ProductsService);
 

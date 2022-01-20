@@ -2,8 +2,8 @@ import { inject, injectable } from 'tsyringe';
 import { ICustomersRepository } from '../Repositories/ICustomersRepositories';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import AppError from '../../../Errors/AppError';
-import { ICartsRepository } from '../../Cart/Repositories/ICartsRepositories';
+import { ICartsRepository } from '@Modules/Cart/Repositories/ICartsRepositories';
+import AppError from '@AppError';
 
 interface IRequest {
   Name: string;

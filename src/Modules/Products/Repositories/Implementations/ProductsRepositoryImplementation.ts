@@ -1,8 +1,10 @@
-import { getRepository, Repository, UpdateResult } from 'typeorm';
-import Product from '../../Entities/Product';
+import { getRepository, Repository } from 'typeorm';
+
 import { ICreateProductDTO } from '../DTOs/ICreateProductDTO';
 import { IProductsRepository } from '../IProductsRepository';
 import { v4 as uuid } from 'uuid';
+import removeTimestamps from '@Utils/removeTimestamps';
+import Product from '@Modules/Products/Entities/Product';
 
 class ProductsRepositoryImplementation implements IProductsRepository {
   private repository: Repository<Product>;
@@ -38,6 +40,14 @@ class ProductsRepositoryImplementation implements IProductsRepository {
   }
   async listAll(): Promise<Product[]> {
     const productsList = await this.repository.find({ relations: ['Colors'] });
+
+    productsList.forEach((prd) => {
+      prd.Colors.forEach((color) => {
+        removeTimestamps(color);
+      });
+
+      removeTimestamps(prd);
+    });
 
     return productsList;
   }

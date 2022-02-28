@@ -5,6 +5,8 @@ import CustomersRepositoryImplementations from '@Modules/Users/Repositories/Impl
 import { ICustomersRepository } from '@Modules/Users/Repositories/ICustomersRepositories';
 import CartsRepositoryImplementations from '@Modules/Cart/Repositories/Implementations/CartsRepositoryImplementations';
 import { ICartsRepository } from '@Modules/Cart/Repositories/ICartsRepositories';
+import { IProductTypesRepository } from '@Modules/Products/Repositories/IProductTypesRepository';
+import ProductTypesRepositoryImplementation from '@Modules/Products/Repositories/Implementations/ProductTypeRepository';
 
 container.registerSingleton<IProductsRepository>(
   'ProductsRepository',
@@ -19,4 +21,9 @@ container.registerSingleton<ICustomersRepository>(
 container.registerSingleton<ICartsRepository>(
   'CartsRepository',
   CartsRepositoryImplementations
+);
+
+container.registerSingleton<IProductTypesRepository>(
+  'ProductTypesRepository',
+  ProductTypesRepositoryImplementation
 );

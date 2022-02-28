@@ -38,8 +38,13 @@ class ProductsRepositoryImplementation implements IProductsRepository {
       throw new Error(e);
     }
   }
-  async listAll(): Promise<Product[]> {
-    const productsList = await this.repository.find({ relations: ['Colors'] });
+  async listByCategory(categoryId: number): Promise<Product[]> {
+    const productsList = await this.repository.find({
+      where: {
+        TypeId: categoryId,
+      },
+      relations: ['Colors'],
+    });
 
     productsList.forEach((prd) => {
       prd.Colors.forEach((color) => {

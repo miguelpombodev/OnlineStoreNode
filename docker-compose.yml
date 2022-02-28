@@ -7,7 +7,7 @@ services:
     user: root
     ports:
       - 1433:1433
-    restart: always
+    restart: on-failure
     environment:
       ACCEPT_EULA: 'Y'
       SA_PASSWORD: 'Miguelpombo96!'

@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import Product from '../Entities/Product';
 
 import { IProductsRepository } from '../Repositories/IProductsRepository';
+import { IProductTypesRepository } from '../Repositories/IProductTypesRepository';
 
 interface IRequest {
   Id?: string;
@@ -17,7 +18,10 @@ interface IRequest {
 class ProductsService {
   constructor(
     @inject('ProductsRepository')
-    private readonly _repository: IProductsRepository
+    private readonly _repository: IProductsRepository,
+
+    @inject('ProductTypesRepository')
+    private readonly _productTypeRepository: IProductTypesRepository
   ) {}
   async create({ Name, TypeId, Sku, Value, StockAmount }: IRequest) {
     const alreadyHasProduct = await this._repository.findByName(Name);
@@ -37,8 +41,14 @@ class ProductsService {
     return productCreated;
   }
 
-  async listAll() {
-    const productsList = await this._repository.listAll();
+  async listByCategory(category: string) {
+    const productCategory = await this._productTypeRepository.findByName(
+      category
+    );
+
+    const productsList = await this._repository.listByCategory(
+      productCategory.Id
+    );
 
     return productsList;
   }

@@ -4,9 +4,17 @@ import { container } from 'tsyringe';
 import ProductsService from '../Services/ProductsService';
 
 class ProductsController {
-  async listAll(request: Request, response: Response): Promise<Response> {
+  async listCategorizedProducts(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
     const _productService = container.resolve(ProductsService);
-    const productBody = await _productService.listAll();
+
+    const { category } = request.query;
+
+    const productBody = await _productService.listByCategory(
+      category as string
+    );
 
     return response.json(productBody);
   }

@@ -9,7 +9,7 @@ export interface IProductsRepository {
     Value,
     StockAmount,
   }: ICreateProductDTO): Promise<Product>;
-  listAll(): Promise<Product[]>;
+  listByCategory(categoryId: number): Promise<Product[]>;
   findById(id: string): Promise<Product>;
   findByName(name: string): Promise<Product>;
   update(productInfoUpdate: Product): Promise<Product>;

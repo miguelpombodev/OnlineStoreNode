@@ -5,7 +5,7 @@ const productsRoute = Router();
 
 const productsController = new ProductsController();
 
-productsRoute.get('/', productsController.listAll);
+productsRoute.get('/', productsController.listCategorizedProducts);
 productsRoute.get('/:id', productsController.listOne);
 productsRoute.post('/', productsController.create);
 productsRoute.put('/:id', productsController.update);

@@ -6,7 +6,7 @@ import { IProductTypesRepository } from '../IProductTypesRepository';
 class ProductTypesRepositoryImplementation implements IProductTypesRepository {
   private repository: Repository<ProductType>;
 
-  private constructor() {
+  constructor() {
     this.repository = getRepository(ProductType);
   }
 
@@ -19,8 +19,15 @@ class ProductTypesRepositoryImplementation implements IProductTypesRepository {
   findById(id: string): ProductType {
     throw new Error('Method not implemented.');
   }
-  findByName(name: string): ProductType {
-    throw new Error('Method not implemented.');
+
+  async findByName(name: string): Promise<ProductType> {
+    const category = await this.repository.findOne({
+      where: {
+        Name: name,
+      },
+    });
+
+    return category;
   }
 }
 

@@ -38,6 +38,9 @@ class Product {
   @OneToMany((type) => ProductColors, (color) => color.Product)
   Colors: ProductColors[];
 
+  @Column()
+  BrandId: number;
+
   @CreateDateColumn()
   CreatedAt: Date;
 

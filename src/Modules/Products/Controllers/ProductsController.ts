@@ -1,14 +1,16 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-
-import ProductsService from '../Services/ProductsService';
+import CreateProductService from '../Services/CreateProductService';
+import DeleteProductService from '../Services/DeleteProductService';
+import ListProductsService from '../Services/ListProductsService';
+import UpdateProductService from '../Services/UpdateProductService';
 
 class ProductsController {
   async listCategorizedProducts(
     request: Request,
     response: Response
   ): Promise<Response> {
-    const _productService = container.resolve(ProductsService);
+    const _productService = container.resolve(ListProductsService);
 
     const { category } = request.query;
 
@@ -20,7 +22,7 @@ class ProductsController {
   }
 
   async listOne(request: Request, response: Response): Promise<Response> {
-    const _productService = container.resolve(ProductsService);
+    const _productService = container.resolve(ListProductsService);
 
     const { id } = request.params;
 
@@ -30,17 +32,17 @@ class ProductsController {
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const _productService = container.resolve(ProductsService);
+    const _productService = container.resolve(CreateProductService);
 
     const body = request.body;
 
-    const creationResult = await _productService.create(body);
+    const creationResult = await _productService.execute(body);
 
     return response.json(creationResult);
   }
 
   async update(request: Request, response: Response): Promise<Response> {
-    const _productService = container.resolve(ProductsService);
+    const _productService = container.resolve(UpdateProductService);
 
     const { id } = request.params;
     const body = request.body;
@@ -56,11 +58,11 @@ class ProductsController {
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
-    const _productService = container.resolve(ProductsService);
+    const _productService = container.resolve(DeleteProductService);
 
     const { id } = request.params;
 
-    const deleteResult = _productService.delete(id);
+    const deleteResult = _productService.execute(id);
 
     return response.json(deleteResult);
   }

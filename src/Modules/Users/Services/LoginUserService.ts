@@ -27,14 +27,10 @@ class LoginUserService {
       throw new AppError('Email/Password are incorrectly');
     }
 
-    const token = sign(
-      {},
-      '815a7374c650d6715af06a8722fdcfce576714091874d5934efb3c544b527ed7',
-      {
-        subject: isAlreadyUser.Id,
-        expiresIn: '1d',
-      }
-    );
+    const token = sign({}, process.env.JWT_SECRET, {
+      subject: isAlreadyUser.Id,
+      expiresIn: '1d',
+    });
 
     const userCart = await this._cartRepository.create(isAlreadyUser.Id, 0);
 

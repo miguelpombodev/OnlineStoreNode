@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-
-import UsersService from '../Services/CustomersService';
+import CreateUserService from '../Services/CreateUserService';
+import FindUserService from '../Services/FindUserService';
+import LoginUserService from '../Services/LoginUserService';
 
 class CustomersController {
   async create(request: Request, response: Response): Promise<Response> {
-    const usersService = container.resolve(UsersService);
+    const usersService = container.resolve(CreateUserService);
 
     const body = request.body;
 
-    const creationResult = await usersService.create(body);
+    const creationResult = await usersService.execute(body);
 
     if (creationResult === null) {
       return response.status(404).json({
@@ -21,21 +22,21 @@ class CustomersController {
   }
 
   async findUser(request: Request, response: Response) {
-    const usersService = container.resolve(UsersService);
+    const usersService = container.resolve(FindUserService);
 
     const { id } = request.params;
 
-    const userInfos = await usersService.findUser(id);
+    const userInfos = await usersService.execute(id);
 
     return response.json(userInfos);
   }
 
   async loginUser(request: Request, response: Response) {
-    const usersService = container.resolve(UsersService);
+    const usersService = container.resolve(LoginUserService);
 
     const body = request.body;
 
-    const loginResult = await usersService.loginUser(body);
+    const loginResult = await usersService.execute(body);
 
     return response.json(loginResult);
   }

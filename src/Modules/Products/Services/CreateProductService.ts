@@ -1,16 +1,7 @@
 import AppError from '@AppError';
 import { inject, injectable } from 'tsyringe';
 import { IProductsRepository } from '../Repositories/IProductsRepository';
-import { IProductTypesRepository } from '../Repositories/IProductTypesRepository';
-
-interface IRequest {
-  Id?: string;
-  Name: string;
-  TypeId: number;
-  Sku: string;
-  Value: number;
-  StockAmount?: number;
-}
+import { IRequest } from './interfaces/IRequest';
 
 @injectable()
 class CreateProductService {
